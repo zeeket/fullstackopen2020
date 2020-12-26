@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Hello = (props) => {
@@ -11,7 +11,11 @@ const Hello = (props) => {
     )
 }
 
-const App = () => {
+const App = (props) => {
+    const [ counter, setCounter ] = useState(0)
+    const increaseByOne = () => setCounter(counter + 1)
+    const decreaseByOne = () => setCounter(counter - 1)
+    const setToZero = () => setCounter(0)
     const now = new Date()
     const a = 10
     const b = 20
@@ -27,6 +31,13 @@ const App = () => {
         <h1>Greetings</h1>
         <Hello name="Maya" age={26 + 10} />
         <Hello name={nimi} age={ika} />
+        <div>{counter}</div>
+        <button onClick={() => setCounter(counter + 1)}>
+        plus
+        </button>
+        <button onClick={() => setCounter(0)}> 
+        zero
+        </button>
         </div>
     )
 }
