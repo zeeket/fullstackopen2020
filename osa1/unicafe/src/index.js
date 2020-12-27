@@ -7,24 +7,25 @@ const Button = (props) => (
     </button>
 )
 
-const Counter = (props) => (
+const StatisticLine = (props) => (
     <p>{props.text} {props.value}</p>
 )
 
 const Statistics = (props) => {
-    let all = props.good+props.neutral+props.bad;
-    let average = (props.good-props.bad)/(all?all:1);
-    let positive = (props.good/(all?all:1))*100+"%";
-    return (
+    let all = props.good + props.neutral + props.bad;
+    let average = (props.good - props.bad) / (all?all:1);
+    let positive = (props.good / (all?all:1)) * 100+"%";
+    
+    return all?(
         <>
-        <Counter text="good" value={props.good}/>
-        <Counter text="neutral" value={props.neutral}/>
-        <Counter text="bad" value={props.bad}/>
-        <Counter text="all" value={all}/>
-        <Counter text="average" value={average}/>
-        <Counter text="positive" value={positive}/>
+        <StatisticLine text="good" value={props.good}/>
+        <StatisticLine text="neutral" value={props.neutral}/>
+        <StatisticLine text="bad" value={props.bad}/>
+        <StatisticLine text="all" value={all}/>
+        <StatisticLine text="average" value={average}/>
+        <StatisticLine text="positive" value={positive}/>
         </>
-    )
+    ):(<p>No Feedback given</p>)
 }
 
 const App = () => {
