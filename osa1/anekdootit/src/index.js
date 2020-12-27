@@ -17,12 +17,17 @@ const App = (props) => {
 
   return (
     <div>
+      <h1>Anecdote of the Day</h1>
       {anecdotes[selected]} 
       <br/>
       <span>has {votes[selected]} votes</span>
       <br/>
       <Button action={()=>setVotes(votes.map((x,i)=>{return x+(i===selected?1:0)}))} text="vote"/>
       <Button action={()=>setSelected(anecdotes.length * Math.random() | 0)} text="new anecdote" />
+      <h1>Anecdote with most votes</h1>
+     {anecdotes[votes.indexOf(Math.max(...votes))]} 
+      <br/>
+    <span>has {Math.max(...votes)} votes</span>
     </div>
   )
 }
