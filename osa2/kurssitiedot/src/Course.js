@@ -13,7 +13,7 @@ const Content = (props) => {
     return (
         <div>
         {props.parts.map((part) => 
-            <Part name = {part.name} exercises = {part.exercises} />
+            <Part key = {part.id} name = {part.name} exercises = {part.exercises} />
         )}
             </div>
         )
