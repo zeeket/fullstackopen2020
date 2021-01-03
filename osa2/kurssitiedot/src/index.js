@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import Course from './Course'
 
 const App = () => {
- const courses = [
-    {
-        name: 'Half Stack application development',
+    const courses = [
+        {
+            name: 'Half Stack application development',
             id: 1,
             parts: [
                 {
@@ -29,7 +29,7 @@ const App = () => {
                     id: 4
                 }
             ]
-    }, 
+        }, 
         {
             name: 'Node.js',
             id: 2,
@@ -46,13 +46,16 @@ const App = () => {
                 }
             ]
         }
- ]
+    ]
     const allCourses = courses.map((course) =>
         <Course key={course.id} course={course} />
     );
-   return (
-    allCourses
-)
+
+
+    return (
+        <div> <h1>Web development curriculum</h1>
+            {allCourses} </div>
+    )
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
