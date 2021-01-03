@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import Filter from './components/Filter'
 
 const App = () => {
-const [persons, setPersons] = useState([
+  const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
     { name: 'Ada Lovelace', number: '39-44-5323523' },
     { name: 'Dan Abramov', number: '12-43-234345' },
@@ -38,18 +39,14 @@ const [persons, setPersons] = useState([
   const handleNameFilterChange = (event) => {
     setNameFilter(event.target.value)
   }
-  
+
   const personsToShow = persons.filter(person => person.name.toLowerCase().startsWith(nameFilter.toLowerCase()))
 
   return (
     <div>
-        <div>
-          filter shown with <input 
-            value={nameFilter}
-            onChange={handleNameFilterChange}
-          />
-        </div>
       <h2>Phonebook</h2>
+      <Filter nameFilter={nameFilter} handleNameFilterChange={handleNameFilterChange}/>
+      <h3>Add a new</h3>
       <form onSubmit={addName}>
         <div>
           name: <input 
