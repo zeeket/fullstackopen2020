@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import axios from 'axios'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -10,16 +10,15 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [nameFilter, setNameFilter] = useState('')
 
+  const hook = () => {
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+      })
+  }
 
-const hook = () => {
-  axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      setPersons(response.data)
-    })
-}
-
-useEffect(hook, [])
+  useEffect(hook, [])
 
   const addName = (event) => {
     event.preventDefault()
@@ -29,9 +28,13 @@ useEffect(hook, [])
     }
 
     if(!persons.some(p => p.name === newName)) {
-      setPersons(persons.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
+      personService
+        .create(nameObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        })
     } else { 
       alert(`${newName} is already added to phonebook`)
     }
