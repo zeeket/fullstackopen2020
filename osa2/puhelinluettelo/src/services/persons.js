@@ -23,5 +23,5 @@ const deletePerson = id => {
 console.log(response);
   })
 }
-
-export default { getAll,create,update,deletePerson }
+const personService = { getAll,create,update,deletePerson }
+export default personService
