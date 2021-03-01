@@ -18,10 +18,10 @@ const Blog = ({ blog, doLike }) => {
    <div>
     <form onSubmit={handleDetailsButton}>
   <div>
-    {blog.title} {blog.author} <button type="submit">{showDetails?"hide":"view"}</button>
+    {blog.title} {blog.author} <button className="detailsButton" type="submit">{showDetails?"hide":"view"}</button>
   </div>
     </form>
-    <div class="details" style={{display:showDetails?"inline":"none"}}>
+    <div className="details" style={{display:showDetails?"inline":"none"}}>
       <p>{blog.url}</p>
     <form onSubmit={handleLikeButton}>
       <p>likes {blog.likes} <button type="submit">like</button>
