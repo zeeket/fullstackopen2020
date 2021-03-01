@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
+import PropTypes from 'prop-types'
 
   const BlogForm = ({createBlog}) => {
 
@@ -10,7 +11,7 @@ import blogService from '../services/blogs'
   const handleSubmitBlog = async (event) => {
     event.preventDefault()
     try {
-      const res = await blogService.create({
+      await blogService.create({
         title, author, url, likes:0
       })
       setTitle('')
@@ -53,6 +54,10 @@ import blogService from '../services/blogs'
       <button type="submit">create</button>
     </form>      
   )
+}
+
+BlogForm.propTypes = {
+  createBlog: PropTypes.func.isRequired 
 }
 
 export default BlogForm
