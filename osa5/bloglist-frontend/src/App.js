@@ -7,23 +7,23 @@ import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
 
-const blogFormRef = useRef()
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistappUser')
     if (loggedUserJSON) {
-      console.log("logged in via localStorage")
+      console.log('logged in via localStorage')
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
       blogService.setToken(user.token)
@@ -50,21 +50,21 @@ const blogFormRef = useRef()
       })
       window.localStorage.setItem(
         'loggedBloglistappUser', JSON.stringify(user)
-      ) 
-      console.log("set localstorage item to ",JSON.stringify(user))
+      )
+      console.log('set localstorage item to ',JSON.stringify(user))
 
       blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
     } catch (exception) {
-      console.log("wrong credentials")
+      console.log('wrong credentials')
     }
   }
 
   const handleLogout = async (event) => {
     event.preventDefault()
-    console.log("logging out")
+    console.log('logging out')
     window.localStorage.removeItem('loggedBloglistappUser')
     setUser(null)
     setUsername('')
@@ -93,7 +93,7 @@ const blogFormRef = useRef()
         />
       </div>
       <button type="submit">login</button>
-    </form>      
+    </form>
   )
 
   const blogForm = () => (
@@ -112,10 +112,10 @@ const blogFormRef = useRef()
       {user !== null && <div>
 
         <form onSubmit={handleLogout}>
-          <p>{user.name} logged in 
+          <p>{user.name} logged in
             <button type="submit">logout</button>
-          </p>    
-        </form>      
+          </p>
+        </form>
       </div>
       }
       {user !==null && blogForm()}

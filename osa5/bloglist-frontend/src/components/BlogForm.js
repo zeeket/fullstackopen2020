@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import blogService from '../services/blogs'
+//import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
-  const BlogForm = ({createBlog}) => {
+const BlogForm = ({ createBlog }) => {
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
@@ -10,19 +10,15 @@ import PropTypes from 'prop-types'
 
   const handleSubmitBlog = async (event) => {
     event.preventDefault()
-    try {
-      await blogService.create({
-        title, author, url, likes:0
-      })
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-    } catch (exception) {
-      console.log("error submitting blog")
-    }
+    createBlog({
+      title, author, url, likes:0
+    })
+    setTitle('')
+    setAuthor('')
+    setUrl('')
   }
 
-    return (
+  return (
     <form onSubmit={handleSubmitBlog}>
       <div>
         title:
@@ -34,7 +30,7 @@ import PropTypes from 'prop-types'
         />
       </div>
       <div>
-        author: 
+        author:
         <input
           type="text"
           value={author}
@@ -43,7 +39,7 @@ import PropTypes from 'prop-types'
         />
       </div>
       <div>
-        url: 
+        url:
         <input
           type="text"
           value={url}
@@ -52,12 +48,12 @@ import PropTypes from 'prop-types'
         />
       </div>
       <button type="submit">create</button>
-    </form>      
+    </form>
   )
 }
 
 BlogForm.propTypes = {
-  createBlog: PropTypes.func.isRequired 
+  createBlog: PropTypes.func.isRequired
 }
 
 export default BlogForm
