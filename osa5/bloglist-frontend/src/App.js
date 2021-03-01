@@ -102,6 +102,11 @@ const App = () => {
     </Togglable>
   )
 
+  const doLike = (blog) => {
+    console.log("pressed like on ",blog._id)
+    blogService.doLike(blog)
+  }
+
 
   return (
     <div>
@@ -120,7 +125,7 @@ const App = () => {
       }
       {user !==null && blogForm()}
       {user !== null && blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} doLike={doLike}/>
       )}
     </div>
   )
