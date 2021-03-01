@@ -1,18 +1,24 @@
-import React, { useRef } from 'react'
-import Togglable from './Togglable'
+import React, { useState } from 'react'
 
 const Blog = ({ blog }) => {
-  const blogRef = useRef()
+  const [showDetails, setShowDetails] = useState(false)
+
+  const handleDetailsButton = async (event) => {
+    event.preventDefault()
+    setShowDetails(!showDetails)
+  }
 
  return (
+    <form onSubmit={handleDetailsButton}>
   <div>
-    {blog.title} {blog.author}
-    <Togglable buttonLabel="view" ref={blogRef}>
+    {blog.title} {blog.author} <button type="submit">{showDetails?"hide":"view"}</button>
+    <div style={{display:showDetails?"inline":"none"}}>
       <p>{blog.url}</p>
       <p>likes {blog.likes}</p>
       <p>{blog.user.name}</p>
-    </Togglable>
+    </div>
   </div>
+    </form>
 )
 }
 
